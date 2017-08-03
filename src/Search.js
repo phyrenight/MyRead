@@ -5,6 +5,7 @@ import './App.css'
 
 class Search extends Component{
   render(){
+    console.log(this.props.books)
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -23,7 +24,15 @@ class Search extends Component{
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+          {this.props.books.map((book) => (
+            <li key={book.id} >
+              <div style={{width: 126, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})`
+            }}/>
+            </li>
+            ))}
+
+          </ol>
         </div>
       </div>
     )
