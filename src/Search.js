@@ -2,10 +2,33 @@ import React, { Component } from 'react'
 import Home from './Home';
 import { Link } from 'react-router-dom'
 import './App.css'
+import escapeRegExp from 'escape-string-regexp';
+import sortBy from 'sort-by';
 
 class Search extends Component{
+  state = {
+    search: ''
+  }
+
+  updateSearch = (search) => {
+    this.setState({ search: search.trim() })
+  }
+
+  clearSearch = () => {
+    this.setState({ search: ''})
+  }
+
   render(){
-    console.log(this.props.books)
+    let searchResults
+    if(this.state.search){
+      const match = new RegExp(escapeRegExp(this.state.search), 'i')
+      searchResults = this.props.books.filter((book) => match.test(book.title))
+    } else {
+        searchResults = this.props.books
+    }
+
+    searchResults.sort(sortBy('name'))
+
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -19,16 +42,18 @@ class Search extends Component{
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
               */}
-            <input type="text" placeholder="Search by title or author"/>
+            <input type="text"
+               placeholder="Search by title or author"
+               vaule={this.state.search}
+               onChange={(event) => this.updateSearch(event.target.value)}/>
                 
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          {this.props.books.map((book) => (
+          {searchResults.map((book) => (
             <li key={book.id} >
-              <div style={{width: 126, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})`
-            }}>
+              <div style={{width: 126, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
                 <div className="book">
                   <div className="book-top">
                     <div className="book-shelf-changer">

@@ -16,8 +16,6 @@ class BooksApp extends React.Component {
   }
 
   render() {
-
-    console.log(this.state.books)
     return (
       <div>
         <Route exact path="/" component={ Home } />
