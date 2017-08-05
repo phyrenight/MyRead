@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import './App.css'
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
+import Book from "./Book";
 
 class Search extends Component{
   state = {
@@ -44,7 +45,7 @@ class Search extends Component{
               */}
             <input type="text"
                placeholder="Search by title or author"
-               vaule={this.state.search}
+               value={this.state.search}
                onChange={(event) => this.updateSearch(event.target.value)}/>
                 
           </div>
@@ -53,21 +54,7 @@ class Search extends Component{
           <ol className="books-grid">
           {searchResults.map((book) => (
             <li key={book.id} >
-              <div style={{width: 126, height: 188, backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
-                <div className="book">
-                  <div className="book-top">
-                    <div className="book-shelf-changer">
-                      <select>
-                        <option value="none" disabled>Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">None</option>
-                      </select>
-                    </div>
-                  </div>  
-                </div>
-              </div>
+              <Book book={ book } />
             </li>
             ))}
 
