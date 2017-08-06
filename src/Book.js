@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 class Book extends Component {
   state ={
+  	shelf : this.props.book.shelf
+
 
   }
   render(){
@@ -10,11 +12,12 @@ class Book extends Component {
         <div className="book">
           <div className="book-top">
             <div className="book-shelf-changer">
-              <select>
-                <option value={this.props.book.shelf} disabled>Move to...</option>
+              <select value={this.state.shelf}
+               onChange={event => this.setState({shelf: event.target.shelf})}>
+                <option disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
-                <option value="read"selected>Read</option>
+                <option value="read">Read</option>
                 <option value="none">None</option>
               </select>
             </div>
