@@ -17,6 +17,11 @@ class Home extends Component{
               <h2 className="bookshelf-title">Currently Reading</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
+              {this.props.books.map(book => (
+                <li key={book.id}>
+                  <Book book={book} />
+                  </li>
+                  ))}
                 </ol>
               </div>
             </div>
@@ -25,7 +30,11 @@ class Home extends Component{
           <h2 className="bookshelf-title">Want to Read</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
-
+              {this.props.books.map(book => (
+                <li key={book.id}>
+                  <Book book={book} />
+                  </li>
+                  ))}
             </ol>
           </div>
         </div>
