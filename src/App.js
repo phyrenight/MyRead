@@ -16,6 +16,13 @@ class BooksApp extends React.Component {
     })
   }
 
+  handleOnChange = (choice) => {
+    console.log(choice)
+    localStorage.setItem( 'shelf', choice);
+    this.setState({ shelf: choice })
+  }
+
+
   render() {
     return (
       <div>

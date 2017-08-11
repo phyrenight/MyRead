@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 
 class Book extends Component {
-  state ={
-  	shelf : this.props.book.shelf
+  state = {
+  	shelf: this.props.book.shelf
+  }
 
+  handleOnChange = (choice) => {
+  	choice.preventDefault()
+    this.setState({ shelf: choice.target.value })
 
   }
+
+
   render(){
     return(
       <div style={{width: 126, height: 188, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`}}>
@@ -13,7 +19,7 @@ class Book extends Component {
           <div className="book-top">
             <div className="book-shelf-changer">
               <select value={this.state.shelf}
-               onChange={event => this.setState({shelf: event.target.shelf})}>
+               onChange={this.handleOnChange}>
                 <option disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
