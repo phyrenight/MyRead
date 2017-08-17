@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Home from './Home';
 import { Link } from 'react-router-dom'
 import './App.css'
 import escapeRegExp from 'escape-string-regexp';

@@ -4,7 +4,6 @@ import Home from './Home'
 import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Book from './Book'
 
 class BooksApp extends React.Component {
   state = {
@@ -15,13 +14,6 @@ class BooksApp extends React.Component {
       this.setState({ books })
     })
   }
-
-  handleOnChange = (choice) => {
-    console.log(choice)
-    localStorage.setItem( 'shelf', choice);
-    this.setState({ shelf: choice })
-  }
-
 
   render() {
     return (
