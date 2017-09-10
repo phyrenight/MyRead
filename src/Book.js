@@ -5,10 +5,13 @@ class Book extends Component {
   	shelf: this.props.book.shelf
   }
 
-  handleOnChange = (choice) => {
-  	choice.preventDefault()
+    handleOnChange = (choice) => {
+    choice.preventDefault()
     this.setState({ shelf: choice.target.value })
-
+    console.log(this.props.book)
+    if(this.props.updateBook){
+      this.props.updateBook(this.props.book, this.state.shelf)
+    }
   }
 
 

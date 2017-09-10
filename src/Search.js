@@ -22,7 +22,7 @@ class Search extends Component{
     let searchResults
     if(this.state.search){
       const match = new RegExp(escapeRegExp(this.state.search), 'i')
-      searchResults = this.props.books.filter((book) => match.test(book.title))
+      searchResults = this.props.books.filter((book) => match.test(book.authors) || match.test(book.title))
     } else {
         searchResults = this.props.books
     }
@@ -53,7 +53,8 @@ class Search extends Component{
           <ol className="books-grid">
           {searchResults.map((book) => (
             <li key={book.id} >
-              <Book book={ book } />
+              <Book book={ book }
+              updateBook={this.props.updateBook} />
             </li>
             ))}
 

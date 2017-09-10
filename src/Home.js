@@ -12,7 +12,8 @@ class Home extends Component{
             <h1>MyReads</h1>
           </div>
         </div>
-          <Shelf books={this.props.books}/>
+          <Shelf books={this.props.books}
+            updateBook={ this.props.updateBook } />
         <div className="open-search">
           <Link to="/search">Add a book</Link>
         </div>
