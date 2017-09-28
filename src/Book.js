@@ -8,7 +8,6 @@ class Book extends Component {
     handleOnChange = (choice) => {
     choice.preventDefault()
     this.setState({ shelf: choice.target.value })
-    console.log(this.props.book)
     if(this.props.updateBook){
       this.props.updateBook(this.props.book, this.state.shelf)
     }

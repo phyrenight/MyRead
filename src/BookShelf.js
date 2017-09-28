@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Book from './Book';
 
+
 class Shelf extends Component{
   state = {
     shelfName: [{id: 'currentlyReading',
@@ -23,7 +24,8 @@ class Shelf extends Component{
               {this.props.books.filter(book => (book.shelf === shelf.id)).map(book => (
               <li key={book.id}>
                           {console.log(book.shelf)}
-                <Book book={book} />
+                <Book book={book}
+                  updateBook={ this.props.updateBook }/>
               </li>
               ))}
             </ol>

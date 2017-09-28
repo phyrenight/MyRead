@@ -1,34 +1,40 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './App.css'
-import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 import Book from "./Book";
+import * as BooksAPI from './BooksAPI'
 
 class Search extends Component{
   state = {
-    search: ''
+    search: '',
+    results: []
   }
 
   updateSearch = (search) => {
     this.setState({ search: search.trim() })
+    
+    if(this.state.search){
+      BooksAPI.search(search, 50).then(searchResult => {
+        if(!searchResult){
+          this.setState({results: []})
+        } else{
+          this.setState({results: searchResult})
+        }
+        return searchResult
+        }).catch(() =>{
+          this.setState({results: []})
+        })
+  }else{
+    this.setState({results: []})
   }
+}
 
   clearSearch = () => {
     this.setState({ search: ''})
   }
 
   render(){
-    let searchResults
-    if(this.state.search){
-      const match = new RegExp(escapeRegExp(this.state.search), 'i')
-      searchResults = this.props.books.filter((book) => match.test(book.authors) || match.test(book.title))
-    } else {
-        searchResults = this.props.books
-    }
-
-    searchResults.sort(sortBy('name'))
-
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -51,7 +57,7 @@ class Search extends Component{
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          {searchResults.map((book) => (
+          {this.state.results.map((book) => (
             <li key={book.id} >
               <Book book={ book }
               updateBook={this.props.updateBook} />
