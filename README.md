@@ -1,10 +1,12 @@
-###MyReads react project
+#MyReads react project
 A udacity react project
 
-##Installation
+## Installation
   Download or clone the repository
-  Then type npm install
+  Then type `npm install` .This will install all the dependencies needed to run the program.
 
 
-##To Run 
-type npm start
+## To Run 
+Navigate the directory
+`type npm start`
+This will have the project running on localhost:3000
