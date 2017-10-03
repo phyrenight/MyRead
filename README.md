@@ -1,4 +1,4 @@
-#MyReads react project
+# MyReads react project
 A udacity react project
 
 ## Installation
