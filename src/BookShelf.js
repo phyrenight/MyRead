@@ -23,7 +23,6 @@ class Shelf extends Component{
             <ol className="books-grid">
               {this.props.books.filter(book => (book.shelf === shelf.id)).map(book => (
               <li key={book.id}>
-                          {console.log(book.shelf)}
                 <Book book={book}
                   updateBook={ this.props.updateBook }/>
               </li>

@@ -9,7 +9,8 @@ class BooksApp extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      books: []
+      books: [],
+      shelf: []
     }
   }
 
@@ -20,13 +21,14 @@ class BooksApp extends React.Component {
   }
 
   update = (book, shelf) => {
+    console.log(shelf)
     BooksAPI.update(book, shelf).then(books => {
-      console.log(books)
-      BooksAPI.getAll().then((books) =>{
-        console.log(this.state.books[1]);
-        this.setState({ books })
-        console.log(this.state);
-      })
+   //  console.log(books[shelf])
+      this.setState({ shelf: books})
+     // console.log(this.state.shelf)
+      BooksAPI.getAll().then((book) =>{
+        this.setState({ books:book })
+     })
     })
   }
 

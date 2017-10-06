@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 
 class Book extends Component {
-  state = {
-  	shelf: this.props.book.shelf
+  constructor(props){
+    super(props);
+    this.state = {
+  	  shelf: this.props.book.shelf
+    }
   }
 
-    handleOnChange = (choice) => {
-    choice.preventDefault()
-    this.setState({ shelf: choice.target.value })
+  handleOnChange = (choice) => {
+    choice.preventDefault();
+    this.props.book.shelf = choice.target.value;
     if(this.props.updateBook){
-      this.props.updateBook(this.props.book, this.state.shelf)
+      this.props.updateBook(this.props.book, this.props.book.shelf)
     }
   }
 
