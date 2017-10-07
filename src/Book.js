@@ -16,7 +16,6 @@ class Book extends Component {
     }
   }
 
-
   render(){
     return(
       <div style={{width: 126, height: 188, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`}}>

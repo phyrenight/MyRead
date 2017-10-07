@@ -10,22 +10,30 @@ class BooksApp extends React.Component {
     super(props);
     this.state = {
       books: [],
-      shelf: []
+      shelf: { currentlyReading : [],
+              wantToRead : [],
+              read: []}
     }
   }
 
   componentDidMount(){
     BooksAPI.getAll().then((books) =>{
       this.setState({ books })
+      for(let i in books){
+        if(books[i].shelf === "currentlyReading"){
+            this.state.shelf.currentlyReading.push(books[i].id)
+        }else if( books[i].shelf === "wantToRead"){
+            this.state.shelf.wantToRead.push(books[i].id)
+        }else if( books[i].shelf === "read"){
+            this.state.shelf.read.push(books[i].id)
+        }
+      }
     })
   }
 
   update = (book, shelf) => {
-    console.log(shelf)
     BooksAPI.update(book, shelf).then(books => {
-   //  console.log(books[shelf])
       this.setState({ shelf: books})
-     // console.log(this.state.shelf)
       BooksAPI.getAll().then((book) =>{
         this.setState({ books:book })
      })
@@ -45,6 +53,7 @@ class BooksApp extends React.Component {
         <Route path="/search"  render={() =>(
         <Search
          books={this.state.books }
+         shelves={this.state.shelf}
          updateBook={(book, shelf) =>{
            this.update(book, shelf)
         }}
