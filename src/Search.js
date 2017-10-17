@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import './App.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './App.css';
 import Book from "./Book";
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI';
 
 class Search extends Component{
   state = {
@@ -11,23 +11,21 @@ class Search extends Component{
   }
 
   updateSearch = (search="") => {
-    this.setState({ search: search.trim() })
+    this.setState({ search: search.trim() });
       BooksAPI.search(search, 50).then(searchResult => {
         if(!searchResult){
-         this.setState({results: []})
+         this.setState({results: []});
         } else{
-          this.checkShelf(searchResult)
-          this.setState({results: searchResult})
+          this.checkShelf(searchResult);
+          this.setState({results: searchResult});
         }
-        return searchResult
+        return searchResult;
         }).catch(() =>{
-          this.setState({results: []})
+          this.setState({results: []});
         })
 }
 
   checkShelf = (searchResults) => {
-    console.log(this.props.shelves)
-    console.log(searchResults)
     for(let i in searchResults){
       if((this.props.shelves.currentlyReading.indexOf(searchResults[i].id)) > -1){
         searchResults[i].shelf = "currentlyReading";
@@ -42,7 +40,7 @@ class Search extends Component{
   }
 
   clearSearch = () => {
-    this.setState({ search: ''})
+    this.setState({ search: ''});
   }
 
   render(){

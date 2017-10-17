@@ -37,7 +37,7 @@ class BooksApp extends React.Component {
       BooksAPI.getAll().then((book) =>{
         this.setState({ books:book });
      });
-    });
+    })
   }
 
 
