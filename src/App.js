@@ -1,9 +1,9 @@
-import React from 'react'
-import Search from './Search'
-import Home from './Home'
-import { Route } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
+import React from 'react';
+import Search from './Search';
+import Home from './Home';
+import { Route } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
+import './App.css';
 
 class BooksApp extends React.Component {
   constructor(props){
@@ -13,31 +13,31 @@ class BooksApp extends React.Component {
       shelf: { currentlyReading : [],
               wantToRead : [],
               read: []}
-    }
+    };
   }
 
   componentDidMount(){
     BooksAPI.getAll().then((books) =>{
-      this.setState({ books })
+      this.setState({ books });
       for(let i in books){
         if(books[i].shelf === "currentlyReading"){
-            this.state.shelf.currentlyReading.push(books[i].id)
+            this.state.shelf.currentlyReading.push(books[i].id);
         }else if( books[i].shelf === "wantToRead"){
-            this.state.shelf.wantToRead.push(books[i].id)
+            this.state.shelf.wantToRead.push(books[i].id);
         }else if( books[i].shelf === "read"){
-            this.state.shelf.read.push(books[i].id)
+            this.state.shelf.read.push(books[i].id);
         }
       }
-    })
+    });
   }
 
   update = (book, shelf) => {
     BooksAPI.update(book, shelf).then(books => {
-      this.setState({ shelf: books})
+      this.setState({ shelf: books});
       BooksAPI.getAll().then((book) =>{
-        this.setState({ books:book })
-     })
-    })
+        this.setState({ books:book });
+     });
+    });
   }
 
 
